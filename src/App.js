@@ -2,14 +2,17 @@ import './App.css';
 import React from 'react';
 
 function App() {
+  const str1 = 'text1';
+  const str2 = 'text2'; 
+
   return (
-    <>
-      <input />
-      <input />
-      <input />
-    </>
+    <div>
+      <p>{str1}</p>
+      <p>{str2}</p>
+    </div>
   );
 }
+
 
 
 
