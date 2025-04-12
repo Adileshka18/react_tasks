@@ -2,65 +2,43 @@ import React, { useState } from 'react';
 
 function App() {
   // Задание 1
-  const [isChecked, setIsChecked] = useState(false);
-  const [message, setMessage] = useState('');
-
-  const handleButtonClick = () => {
-    if (isChecked) {
-      setMessage('Привет, пользователь!');
-    } else {
-      setMessage('До свидания!');
-    }
-  };
+  const [isAdult, setIsAdult] = useState(false);
 
   // Задание 2
-  const [htmlChecked, setHtmlChecked] = useState(false);
-  const [cssChecked, setCssChecked] = useState(false);
-  const [jsChecked, setJsChecked] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   return (
     <div>
       {/* Задание 1 */}
-      <input
-        type="checkbox"
-        checked={isChecked}
-        onChange={(e) => setIsChecked(e.target.checked)}
-      />
-      <button onClick={handleButtonClick}>Нажми меня</button>
-      <p>{message}</p>
+      <label>
+        <input
+          type="checkbox"
+          checked={isAdult}
+          onChange={(e) => setIsAdult(e.target.checked)}
+        />
+        Мне уже есть 18 лет
+      </label>
+      {isAdult ? (
+        <div>
+          <h2>Ура, вам уже есть 18</h2>
+          <p>здесь расположен контент только для взрослых</p>
+        </div>
+      ) : (
+        <div>
+          <p>увы, вам еще нет 18 лет:(</p>
+        </div>
+      )}
 
       {/* Задание 2 */}
-      <div>
-        <label>
-          <input
-            type="checkbox"
-            checked={htmlChecked}
-            onChange={(e) => setHtmlChecked(e.target.checked)}
-          />
-          HTML
-        </label>
-        <p>{htmlChecked ? 'Вы знаете HTML' : 'Вы не выбрали HTML'}</p>
-
-        <label>
-          <input
-            type="checkbox"
-            checked={cssChecked}
-            onChange={(e) => setCssChecked(e.target.checked)}
-          />
-          CSS
-        </label>
-        <p>{cssChecked ? 'Вы знаете CSS' : 'Вы не выбрали CSS'}</p>
-
-        <label>
-          <input
-            type="checkbox"
-            checked={jsChecked}
-            onChange={(e) => setJsChecked(e.target.checked)}
-          />
-          JS
-        </label>
-        <p>{jsChecked ? 'Вы знаете JS' : 'Вы не выбрали JS'}</p>
-      </div>
+      <label>
+        <input
+          type="checkbox"
+          checked={isVisible}
+          onChange={(e) => setIsVisible(e.target.checked)}
+        />
+        Показать абзац
+      </label>
+      {isVisible && <p>Этот абзац будет видимым, если чекбокс отмечен</p>}
     </div>
   );
 }
