@@ -1,15 +1,14 @@
 import React from 'react';
 
 function App() {
-  const isAdmin = true;
+  const age = 19;
 
   return (
     <div>
-      {isAdmin && (
-        <div>
-          <p>Добро пожаловать, администратор!</p>
-          <p>У вас есть доступ к админ-панели.</p>
-        </div>
+      {age > 18 ? (
+        <p>Вы совершеннолетний.</p>
+      ) : (
+        <p>Вы несовершеннолетний.</p>
       )}
     </div>
   );
