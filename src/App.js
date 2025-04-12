@@ -1,22 +1,16 @@
 import React from 'react';
 
 function App() {
-  
-  function show1() {
-    alert(1);
-  }
-  
-  function show2() {
-    alert(2);
-  }
-
   return (
     <div>
-      {/* Кнопка с привязанным обработчиком onClick для вызова функции show1 */}
-      <button onClick={show1}>act1</button>
+      {/* Кнопка 1 с обработчиком onClick для вывода числа 1 */}
+      <button onClick={() => alert(1)}>act1</button>
       
-      {/* Кнопка с привязанным обработчиком onClick для вызова функции show2 */}
-      <button onClick={show2}>act2</button>
+      {/* Кнопка 2 с обработчиком onClick для вывода числа 2 */}
+      <button onClick={() => alert(2)}>act2</button>
+      
+      {/* Кнопка 3 с обработчиком onClick для вывода числа 3 */}
+      <button onClick={() => alert(3)}>act3</button>
     </div>
   );
 }
