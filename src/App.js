@@ -1,16 +1,20 @@
 import React from 'react';
 
 function App() {
+  // Массив элементов li
+  const arr = [
+    <li key={1}>1</li>,
+    <li key={2}>2</li>,
+    <li key={3}>3</li>,
+    <li key={4}>4</li>,
+    <li key={5}>5</li>,
+  ];
+
   return (
     <div>
-      {/* Кнопка 1 с обработчиком onClick для вывода числа 1 */}
-      <button onClick={() => alert(1)}>act1</button>
-      
-      {/* Кнопка 2 с обработчиком onClick для вывода числа 2 */}
-      <button onClick={() => alert(2)}>act2</button>
-      
-      {/* Кнопка 3 с обработчиком onClick для вывода числа 3 */}
-      <button onClick={() => alert(3)}>act3</button>
+      <ul>
+        {arr} {/* Вставляем массив элементов li в список ul */}
+      </ul>
     </div>
   );
 }
