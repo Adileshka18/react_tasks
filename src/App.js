@@ -1,45 +1,98 @@
 import React, { useState } from 'react';
 
 function App() {
-  const [items, setItems] = useState([ 'Item 1', 'Item 2', 'Item 3' ]);
+  const [numbers, setNumbers] = useState([1, 2, 3, 4, 5]);
   const [inputText, setInputText] = useState('');
 
-  const handleAddItem = () => {
-    setItems([...items, `Item ${items.length + 1}`]);
+  const handleSquare = (index) => {
+    const newNumbers = [...numbers];
+    newNumbers[index] = newNumbers[index] ** 2;
+    setNumbers(newNumbers);
   };
 
-  const handleInputChange = (event) => {
-    setInputText(event.target.value);
+  const handleDelete = (index) => {
+    const newNumbers = numbers.filter((_, i) => i !== index);
+    setNumbers(newNumbers);
   };
 
-  const handleAddFromInput = () => {
-    if (inputText.trim()) {
-      setItems([...items, inputText]);
-      setInputText(''); // Очистить инпут после добавления
+  const handleTextClick = (text) => {
+    setInputText(text);
+  };
+
+  const handleInputBlur = (index) => {
+    if (inputText.trim() !== '') {
+      const newNumbers = [...numbers];
+      newNumbers[index] = inputText;
+      setNumbers(newNumbers);
     }
+  };
+
+  const handleReverseOrder = () => {
+    setNumbers([...numbers].reverse());
   };
 
   return (
     <div>
-      <h2>Task 1 - Добавление нового элемента в список</h2>
-      <button onClick={handleAddItem}>Добавить элемент</button>
+      <h2>Task 1 - Список чисел, возведение в квадрат</h2>
       <ul>
-        {items.map((item, index) => (
-          <li key={index}>{item}</li>
+        {numbers.map((number, index) => (
+          <li key={index} onClick={() => handleSquare(index)}>
+            {number}
+            <button onClick={(e) => {
+              e.stopPropagation();  // Чтобы кнопка не вызывала handleSquare
+              handleDelete(index);
+            }}>Удалить</button>
+          </li>
         ))}
       </ul>
 
-      <h2>Task 2 - Добавление элемента по тексту инпута</h2>
+      <h2>Task 2 - Кнопка для удаления li</h2>
+      <ul>
+        {numbers.map((number, index) => (
+          <li key={index} onClick={() => handleSquare(index)}>
+            {number}
+            <button onClick={(e) => {
+              e.stopPropagation();  // Чтобы кнопка не вызывала handleSquare
+              handleDelete(index);
+            }}>Удалить</button>
+          </li>
+        ))}
+      </ul>
+
+      <h2>Task 3 - Клик по li, текст попадает в инпут</h2>
+      <ul>
+        {numbers.map((number, index) => (
+          <li key={index} onClick={() => handleTextClick(number)}>
+            {number}
+          </li>
+        ))}
+      </ul>
       <input
         type="text"
         value={inputText}
-        onChange={handleInputChange}
-        placeholder="Введите текст для нового элемента"
+        onChange={(e) => setInputText(e.target.value)}
+        onBlur={() => handleInputBlur(numbers.indexOf(inputText))}
       />
-      <button onClick={handleAddFromInput}>Добавить из инпута</button>
+
+      <h2>Task 4 - Модификация текста после потери фокуса</h2>
+      <input
+        type="text"
+        value={inputText}
+        onChange={(e) => setInputText(e.target.value)}
+        onBlur={() => handleInputBlur(numbers.indexOf(inputText))}
+      />
+
+      <h2>Task 5 - Переворот порядка li</h2>
+      <button onClick={handleReverseOrder}>Перевернуть порядок</button>
       <ul>
-        {items.map((item, index) => (
-          <li key={index}>{item}</li>
+        {numbers.map((number, index) => (
+          <li key={index} onClick={() => handleSquare(index)}>
+            {number}
+            <button onClick={(e) => {
+              e.stopPropagation();
+              handleDelete(index);
+            }}>Удалить</button>
+          </li>
         ))}
       </ul>
     </div>
