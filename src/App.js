@@ -1,17 +1,14 @@
 import React from 'react';
 
 function App() {
-  const items = [];  
-
- 
-  for (let i = 1; i <= 5; i++) {
-    items.push(<li key={i}>{i}</li>);
-  }
+  const arr = ['a', 'b', 'c', 'd', 'e'];  
 
   return (
     <div>
       <ul>
-        {items} 
+        {arr.map((item, index) => (
+          <li key={index}>{item}</li>  
+        ))}
       </ul>
     </div>
   );
