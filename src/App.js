@@ -1,100 +1,66 @@
 import React, { useState } from 'react';
 
 function App() {
-  const [numbers, setNumbers] = useState([1, 2, 3, 4, 5]);
-  const [inputText, setInputText] = useState('');
+  const [items, setItems] = useState([1, 2, 3]); // Для первого задания
+  const [inputValue, setInputValue] = useState('');
+  const [inputValues, setInputValues] = useState({ input1: '', input2: '', input3: '' });
 
-  const handleSquare = (index) => {
-    const newNumbers = [...numbers];
-    newNumbers[index] = newNumbers[index] ** 2;
-    setNumbers(newNumbers);
+  const addItem = () => {
+    setItems([...items, inputValue]); 
+    setInputValue(''); 
   };
 
-  const handleDelete = (index) => {
-    const newNumbers = numbers.filter((_, i) => i !== index);
-    setNumbers(newNumbers);
-  };
-
-  const handleTextClick = (text) => {
-    setInputText(text);
-  };
-
-  const handleInputBlur = (index) => {
-    if (inputText.trim() !== '') {
-      const newNumbers = [...numbers];
-      newNumbers[index] = inputText;
-      setNumbers(newNumbers);
+  const addItemFromInputs = () => {
+    const { input1, input2, input3 } = inputValues;
+    if (input1 && input2 && input3) {
+      setItems([...items, `${input1} - ${input2} - ${input3}`]);
+      setInputValues({ input1: '', input2: '', input3: '' }); 
     }
-  };
-
-  const handleReverseOrder = () => {
-    setNumbers([...numbers].reverse());
   };
 
   return (
     <div>
-      <h2>Task 1 - Список чисел, возведение в квадрат</h2>
+      <h2>Task 1 - Добавить новый элемент в конец списка</h2>
       <ul>
-        {numbers.map((number, index) => (
-          <li key={index} onClick={() => handleSquare(index)}>
-            {number}
-            <button onClick={(e) => {
-              e.stopPropagation();  // Чтобы кнопка не вызывала handleSquare
-              handleDelete(index);
-            }}>Удалить</button>
-          </li>
+        {items.map((item, index) => (
+          <li key={index}>{item}</li>
         ))}
       </ul>
-
-      <h2>Task 2 - Кнопка для удаления li</h2>
-      <ul>
-        {numbers.map((number, index) => (
-          <li key={index} onClick={() => handleSquare(index)}>
-            {number}
-            <button onClick={(e) => {
-              e.stopPropagation();  // Чтобы кнопка не вызывала handleSquare
-              handleDelete(index);
-            }}>Удалить</button>
-          </li>
-        ))}
-      </ul>
-
-      <h2>Task 3 - Клик по li, текст попадает в инпут</h2>
-      <ul>
-        {numbers.map((number, index) => (
-          <li key={index} onClick={() => handleTextClick(number)}>
-            {number}
-          </li>
-        ))}
-      </ul>
+      <button onClick={addItem}>Добавить элемент</button>
       <input
         type="text"
-        value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
-        onBlur={() => handleInputBlur(numbers.indexOf(inputText))}
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+        placeholder="Введите новый элемент"
       />
 
-      <h2>Task 4 - Модификация текста после потери фокуса</h2>
-      <input
-        type="text"
-        value={inputText}
-        onChange={(e) => setInputText(e.target.value)}
-        onBlur={() => handleInputBlur(numbers.indexOf(inputText))}
-      />
-
-      <h2>Task 5 - Переворот порядка li</h2>
-      <button onClick={handleReverseOrder}>Перевернуть порядок</button>
+      <h2>Task 2 - Добавить новый элемент с использованием трех инпутов</h2>
       <ul>
-        {numbers.map((number, index) => (
-          <li key={index} onClick={() => handleSquare(index)}>
-            {number}
-            <button onClick={(e) => {
-              e.stopPropagation();
-              handleDelete(index);
-            }}>Удалить</button>
-          </li>
+        {items.map((item, index) => (
+          <li key={index}>{item}</li>
         ))}
       </ul>
+      <button onClick={addItemFromInputs}>Добавить с инпутов</button>
+      <div>
+        <input
+          type="text"
+          value={inputValues.input1}
+          onChange={(e) => setInputValues({ ...inputValues, input1: e.target.value })}
+          placeholder="Введите первый текст"
+        />
+        <input
+          type="text"
+          value={inputValues.input2}
+          onChange={(e) => setInputValues({ ...inputValues, input2: e.target.value })}
+          placeholder="Введите второй текст"
+        />
+        <input
+          type="text"
+          value={inputValues.input3}
+          onChange={(e) => setInputValues({ ...inputValues, input3: e.target.value })}
+          placeholder="Введите третий текст"
+        />
+      </div>
     </div>
   );
 }
