@@ -1,25 +1,23 @@
 import React, { useState } from 'react';
 
 function App() {
-  const cities = ['Москва', 'Санкт-Петербург', 'Новосибирск', 'Екатеринбург', 'Казань'];
-  const [selectedCity, setSelectedCity] = useState('');
+  const [ageGroup, setAgeGroup] = useState('');
 
   const handleChange = (event) => {
-    setSelectedCity(event.target.value);
+    setAgeGroup(event.target.value);
   };
 
   return (
     <div>
-      <select onChange={handleChange} value={selectedCity}>
-        <option value="">Выберите город</option>
-        {cities.map((city, index) => (
-          <option key={index} value={city}>
-            {city}
-          </option>
-        ))}
+      <select onChange={handleChange} value={ageGroup}>
+        <option value="">Выберите вашу возрастную группу</option>
+        <option value="0-12">0-12 лет</option>
+        <option value="13-17">13-17 лет</option>
+        <option value="18-25">18-25 лет</option>
+        <option value="25+">Старше 25 лет</option>
       </select>
 
-      <p>Вы выбрали город: {selectedCity}</p>
+      {ageGroup && <p>Вы выбрали возрастную группу: {ageGroup}</p>}
     </div>
   );
 }
