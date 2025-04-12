@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 function App() {
+  const cities = ['Москва', 'Санкт-Петербург', 'Новосибирск', 'Екатеринбург', 'Казань'];
   const [selectedCity, setSelectedCity] = useState('');
 
   const handleChange = (event) => {
@@ -11,11 +12,11 @@ function App() {
     <div>
       <select onChange={handleChange} value={selectedCity}>
         <option value="">Выберите город</option>
-        <option value="Москва">Москва</option>
-        <option value="Санкт-Петербург">Санкт-Петербург</option>
-        <option value="Новосибирск">Новосибирск</option>
-        <option value="Екатеринбург">Екатеринбург</option>
-        <option value="Казань">Казань</option>
+        {cities.map((city, index) => (
+          <option key={index} value={city}>
+            {city}
+          </option>
+        ))}
       </select>
 
       <p>Вы выбрали город: {selectedCity}</p>
