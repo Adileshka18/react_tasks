@@ -1,16 +1,24 @@
 import React, { useState } from 'react';
 
 function App() {
-  const [age, setAge] = useState(30);
-
-  const increaseAge = () => setAge(age + 1);
-  const decreaseAge = () => setAge(age - 1);
+  const [text1, setText1] = useState('');
+  const [text2, setText2] = useState('');
 
   return (
     <div>
-      <p>Age: {age}</p>
-      <button onClick={increaseAge}>Increase Age</button>
-      <button onClick={decreaseAge}>Decrease Age</button>
+      <input 
+        type="text" 
+        value={text1} 
+        onChange={event => setText1(event.target.value)} 
+      />
+      <p>Text 1: {text1}</p>
+
+      <input 
+        type="text" 
+        value={text2} 
+        onChange={event => setText2(event.target.value)} 
+      />
+      <p>Text 2: {text2}</p>
     </div>
   );
 }
