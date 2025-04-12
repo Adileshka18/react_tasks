@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 
 function App() {
-  const [name, setName] = useState('John');
-  const [surname, setSurname] = useState('Doe');
+  const [isBanned, setIsBanned] = useState(false);
 
-  const handleNameChange = () => setName('Alex');
-  const handleSurnameChange = () => setSurname('Smith');
+  const handleBan = () => setIsBanned(true);
+  const handleUnban = () => setIsBanned(false);
 
   return (
     <div>
-      <p>Name: {name}</p>
-      <p>Surname: {surname}</p>
+      <p>User is {isBanned ? 'banned' : 'not banned'}</p>
 
-      <button onClick={handleNameChange}>Change Name</button>
-      <button onClick={handleSurnameChange}>Change Surname</button>
+      {!isBanned && <button onClick={handleBan}>Ban User</button>}
+      {isBanned && <button onClick={handleUnban}>Unban User</button>}
     </div>
   );
 }
