@@ -2,31 +2,65 @@ import React, { useState } from 'react';
 
 function App() {
   // Задание 1
-  const [text, setText] = useState('');
-  
-  const translitText = text.replace(/а/g, 'a').replace(/б/g, 'b').replace(/в/g, 'v') // и так далее для каждой буквы
-  
+  const [isChecked, setIsChecked] = useState(false);
+  const [message, setMessage] = useState('');
+
+  const handleButtonClick = () => {
+    if (isChecked) {
+      setMessage('Привет, пользователь!');
+    } else {
+      setMessage('До свидания!');
+    }
+  };
+
   // Задание 2
-  const [numbers, setNumbers] = useState('');
-  const sum = numbers.split('\n').reduce((total, line) => total + (parseFloat(line) || 0), 0);
-  
+  const [htmlChecked, setHtmlChecked] = useState(false);
+  const [cssChecked, setCssChecked] = useState(false);
+  const [jsChecked, setJsChecked] = useState(false);
+
   return (
     <div>
       {/* Задание 1 */}
-      <textarea
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        placeholder="Введите текст"
+      <input
+        type="checkbox"
+        checked={isChecked}
+        onChange={(e) => setIsChecked(e.target.checked)}
       />
-      <p>Транслит: {translitText}</p>
+      <button onClick={handleButtonClick}>Нажми меня</button>
+      <p>{message}</p>
 
       {/* Задание 2 */}
-      <textarea
-        value={numbers}
-        onChange={(e) => setNumbers(e.target.value)}
-        placeholder="Введите числа"
-      />
-      <p>Сумма чисел: {sum}</p>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            checked={htmlChecked}
+            onChange={(e) => setHtmlChecked(e.target.checked)}
+          />
+          HTML
+        </label>
+        <p>{htmlChecked ? 'Вы знаете HTML' : 'Вы не выбрали HTML'}</p>
+
+        <label>
+          <input
+            type="checkbox"
+            checked={cssChecked}
+            onChange={(e) => setCssChecked(e.target.checked)}
+          />
+          CSS
+        </label>
+        <p>{cssChecked ? 'Вы знаете CSS' : 'Вы не выбрали CSS'}</p>
+
+        <label>
+          <input
+            type="checkbox"
+            checked={jsChecked}
+            onChange={(e) => setJsChecked(e.target.checked)}
+          />
+          JS
+        </label>
+        <p>{jsChecked ? 'Вы знаете JS' : 'Вы не выбрали JS'}</p>
+      </div>
     </div>
   );
 }
