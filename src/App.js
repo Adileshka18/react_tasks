@@ -1,11 +1,20 @@
 import React from 'react';
 
 function App() {
-  const isAuth = false;
+  
+  function getDigitsSum(number) {
+    return number
+      .toString()       
+      .map(Number)       
+      .reduce((sum, num) => sum + num, 0);  
+  }
+
+  
+  const sum = getDigitsSum(123);
 
   return (
     <div>
-      {!isAuth && <p>пожалуйста, авторизуйтесь</p>}
+      <p>Сумма цифр числа 123: {sum}</p>
     </div>
   );
 }
