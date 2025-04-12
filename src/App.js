@@ -1,56 +1,47 @@
 import React, { useState } from 'react';
 
 function App() {
-  const [date, setDate] = useState({
-    year: 2025,
-    month: 12,
-    day: 31,
-  });
+  const [items, setItems] = useState([ 'Item 1', 'Item 2', 'Item 3' ]);
+  const [inputText, setInputText] = useState('');
 
-  const handleDateChange = (field, event) => {
-    const newDate = { ...date, [field]: Number(event.target.value) };
-    setDate(newDate);
+  const handleAddItem = () => {
+    setItems([...items, `Item ${items.length + 1}`]);
   };
 
-  const getDayOfWeek = () => {
-    const { year, month, day } = date;
-    const dateObject = new Date(year, month - 1, day); 
-    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-    return daysOfWeek[dateObject.getDay()];
+  const handleInputChange = (event) => {
+    setInputText(event.target.value);
+  };
+
+  const handleAddFromInput = () => {
+    if (inputText.trim()) {
+      setItems([...items, inputText]);
+      setInputText(''); // Очистить инпут после добавления
+    }
   };
 
   return (
     <div>
-      <h2>Дата:</h2>
-      <p>
-        {date.day}.{date.month}.{date.year} - {getDayOfWeek()}
-      </p>
+      <h2>Task 1 - Добавление нового элемента в список</h2>
+      <button onClick={handleAddItem}>Добавить элемент</button>
+      <ul>
+        {items.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
 
-      <h3>Редактировать дату:</h3>
-      <div>
-        <label>Год:</label>
-        <input 
-          type="number" 
-          value={date.year} 
-          onChange={(event) => handleDateChange('year', event)} 
-        />
-      </div>
-      <div>
-        <label>Месяц:</label>
-        <input 
-          type="number" 
-          value={date.month} 
-          onChange={(event) => handleDateChange('month', event)} 
-        />
-      </div>
-      <div>
-        <label>День:</label>
-        <input 
-          type="number" 
-          value={date.day} 
-          onChange={(event) => handleDateChange('day', event)} 
-        />
-      </div>
+      <h2>Task 2 - Добавление элемента по тексту инпута</h2>
+      <input
+        type="text"
+        value={inputText}
+        onChange={handleInputChange}
+        placeholder="Введите текст для нового элемента"
+      />
+      <button onClick={handleAddFromInput}>Добавить из инпута</button>
+      <ul>
+        {items.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }
