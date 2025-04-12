@@ -1,39 +1,44 @@
 import React, { useState } from 'react';
 
 function App() {
-  // Задание 1: Конвертация возраста в год рождения
-  const [age, setAge] = useState('');
-  const handleAgeChange = (event) => {
-    setAge(event.target.value);
-  };
-  const birthYear = age ? new Date().getFullYear() - age : '';
+  const [numbers, setNumbers] = useState([0, 0, 0, 0, 0]);
 
-  // Задание 2: Конвертация температуры Фаренгейта в Цельсий
-  const [fahrenheit, setFahrenheit] = useState('');
-  const handleFahrenheitChange = (event) => {
-    setFahrenheit(event.target.value);
+  const handleInputChange = (index, event) => {
+    const newNumbers = [...numbers];
+    newNumbers[index] = parseFloat(event.target.value) || 0;
+    setNumbers(newNumbers);
   };
-  const celsius = fahrenheit ? ((fahrenheit - 32) * 5) / 9 : '';
+
+  const average = numbers.reduce((acc, num) => acc + num, 0) / numbers.length;
 
   return (
     <div>
-      {/* Задание 1 */}
       <input
         type="number"
-        placeholder="Введите ваш возраст"
-        value={age}
-        onChange={handleAgeChange}
+        value={numbers[0]}
+        onChange={(e) => handleInputChange(0, e)}
       />
-      <p>Ваш год рождения: {birthYear}</p>
-
-      {/* Задание 2 */}
       <input
         type="number"
-        placeholder="Введите градусы Фаренгейта"
-        value={fahrenheit}
-        onChange={handleFahrenheitChange}
+        value={numbers[1]}
+        onChange={(e) => handleInputChange(1, e)}
       />
-      <p>Температура в Цельсиях: {celsius}</p>
+      <input
+        type="number"
+        value={numbers[2]}
+        onChange={(e) => handleInputChange(2, e)}
+      />
+      <input
+        type="number"
+        value={numbers[3]}
+        onChange={(e) => handleInputChange(3, e)}
+      />
+      <input
+        type="number"
+        value={numbers[4]}
+        onChange={(e) => handleInputChange(4, e)}
+      />
+      <p>Среднее арифметическое: {average}</p>
     </div>
   );
 }
