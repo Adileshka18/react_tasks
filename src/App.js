@@ -1,20 +1,22 @@
 import React from 'react';
 
 function App() {
-  function getDigitsSum(number) {
-    return number
-      .toString()         
-      .split('')          
-      .map(Number)        
-      .reduce((sum, num) => sum + num, 0);  
-  }
-
   
-  const sum = getDigitsSum(12345);
+  function show1() {
+    alert(1);
+  }
+  
+  function show2() {
+    alert(2);
+  }
 
   return (
     <div>
-      <p>Сумма цифр числа 12345: {sum}</p>
+      {/* Кнопка с привязанным обработчиком onClick для вызова функции show1 */}
+      <button onClick={show1}>act1</button>
+      
+      {/* Кнопка с привязанным обработчиком onClick для вызова функции show2 */}
+      <button onClick={show2}>act2</button>
     </div>
   );
 }
