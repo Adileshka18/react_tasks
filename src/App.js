@@ -1,7 +1,6 @@
 import React from 'react';
 
 function App() {
-  
   const users = [
     { id: 1, name: 'user1', surn: 'surn1', age: 30 },
     { id: 2, name: 'user2', surn: 'surn2', age: 31 },
@@ -10,14 +9,27 @@ function App() {
 
   return (
     <div>
-      <ul>
-        
-        {users.map((user) => (
-          <li key={user.id}>
-            Name: {user.name}, Surname: {user.surn}, Age: {user.age}
-          </li>
-        ))}
-      </ul>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Age</th>
+          </tr>
+        </thead>
+        <tbody>
+          {/* Используем .map для рендеринга строк таблицы */}
+          {users.map((user) => (
+            <tr key={user.id}>
+              <td>{user.id}</td>
+              <td>{user.name}</td>
+              <td>{user.surn}</td>
+              <td>{user.age}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
