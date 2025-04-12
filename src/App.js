@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 
 function App() {
-  const [isBanned, setIsBanned] = useState(false);
+  const [age, setAge] = useState(30);
 
-  const handleBan = () => setIsBanned(true);
-  const handleUnban = () => setIsBanned(false);
+  const increaseAge = () => setAge(age + 1);
+  const decreaseAge = () => setAge(age - 1);
 
   return (
     <div>
-      <p>User is {isBanned ? 'banned' : 'not banned'}</p>
-
-      {!isBanned && <button onClick={handleBan}>Ban User</button>}
-      {isBanned && <button onClick={handleUnban}>Unban User</button>}
+      <p>Age: {age}</p>
+      <button onClick={increaseAge}>Increase Age</button>
+      <button onClick={decreaseAge}>Decrease Age</button>
     </div>
   );
 }
