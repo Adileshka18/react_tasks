@@ -1,44 +1,24 @@
 import React, { useState } from 'react';
 
 function App() {
-  // Задание 1
-  const [isAdult, setIsAdult] = useState(false);
+  const [selectedCity, setSelectedCity] = useState('');
 
-  // Задание 2
-  const [isVisible, setIsVisible] = useState(false);
+  const handleChange = (event) => {
+    setSelectedCity(event.target.value);
+  };
 
   return (
     <div>
-      {/* Задание 1 */}
-      <label>
-        <input
-          type="checkbox"
-          checked={isAdult}
-          onChange={(e) => setIsAdult(e.target.checked)}
-        />
-        Мне уже есть 18 лет
-      </label>
-      {isAdult ? (
-        <div>
-          <h2>Ура, вам уже есть 18</h2>
-          <p>здесь расположен контент только для взрослых</p>
-        </div>
-      ) : (
-        <div>
-          <p>увы, вам еще нет 18 лет:(</p>
-        </div>
-      )}
+      <select onChange={handleChange} value={selectedCity}>
+        <option value="">Выберите город</option>
+        <option value="Москва">Москва</option>
+        <option value="Санкт-Петербург">Санкт-Петербург</option>
+        <option value="Новосибирск">Новосибирск</option>
+        <option value="Екатеринбург">Екатеринбург</option>
+        <option value="Казань">Казань</option>
+      </select>
 
-      {/* Задание 2 */}
-      <label>
-        <input
-          type="checkbox"
-          checked={isVisible}
-          onChange={(e) => setIsVisible(e.target.checked)}
-        />
-        Показать абзац
-      </label>
-      {isVisible && <p>Этот абзац будет видимым, если чекбокс отмечен</p>}
+      <p>Вы выбрали город: {selectedCity}</p>
     </div>
   );
 }
