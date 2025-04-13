@@ -1,21 +1,43 @@
 import React from 'react';
 
-function Employee({ surname, name, patronymic, salary }) {
+function User({ name, surname, age }) {
   return (
-    <div style={{ border: '1px solid #ccc', padding: '10px', margin: '10px', borderRadius: '5px' }}>
-      <h2>{surname} {name} {patronymic}</h2>
-      <p>Зарплата: {salary} руб.</p>
-    </div>
+    <tr>
+      <td>{name}</td>
+      <td>{surname}</td>
+      <td>{age}</td>
+    </tr>
   );
 }
 
+function id() {
+  return Math.random().toString(36).substr(2, 9);
+}
+
 function App() {
+  const users = [
+    { id: id(), name: 'user1', surn: 'surn1', age: 30 },
+    { id: id(), name: 'user2', surn: 'surn2', age: 31 },
+    { id: id(), name: 'user3', surn: 'surn3', age: 32 },
+  ];
+
   return (
     <div>
-      <h1>Список сотрудников</h1>
-      <Employee surname="Иванов" name="Иван" patronymic="Иванович" salary={50000} />
-      <Employee surname="Петров" name="Петр" patronymic="Петрович" salary={60000} />
-      <Employee surname="Сидоров" name="Алексей" patronymic="Алексеевич" salary={55000} />
+      <h1>Список пользователей</h1>
+      <table border="1" cellPadding="5">
+        <thead>
+          <tr>
+            <th>Имя</th>
+            <th>Фамилия</th>
+            <th>Возраст</th>
+          </tr>
+        </thead>
+        <tbody>
+          {users.map(user => (
+            <User key={user.id} name={user.name} surname={user.surn} age={user.age} />
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
