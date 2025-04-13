@@ -11,6 +11,7 @@ function App() {
       <User />
       <User />
       <User />
+      <User />
     </div>
   );
 }
