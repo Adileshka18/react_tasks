@@ -1,29 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-function User({ name, surname, age }) {
+// Функция для генерации уникального id
+function generateId() {
+  return Math.random().toString(36).substr(2, 9);
+}
+
+// Компонент User для отображения одного пользователя
+function User({ user }) {
   return (
     <tr>
-      <td>{name}</td>
-      <td>{surname}</td>
-      <td>{age}</td>
+      <td>{user.name}</td>
+      <td>{user.surname}</td>
+      <td>{user.age}</td>
     </tr>
   );
 }
 
-function id() {
-  return Math.random().toString(36).substr(2, 9);
-}
-
-function App() {
-  const users = [
-    { id: id(), name: 'user1', surn: 'surn1', age: 30 },
-    { id: id(), name: 'user2', surn: 'surn2', age: 31 },
-    { id: id(), name: 'user3', surn: 'surn3', age: 32 },
-  ];
+// Основной компонент Users
+function Users() {
+  const [users, setUsers] = useState([
+    { id: generateId(), name: 'Иван', surname: 'Иванов', age: 30 },
+    { id: generateId(), name: 'Петр', surname: 'Петров', age: 31 },
+    { id: generateId(), name: 'Сергей', surname: 'Сергеев', age: 32 },
+  ]);
 
   return (
     <div>
-      <h1>Список пользователей</h1>
+      <h2>Список пользователей</h2>
       <table border="1" cellPadding="5">
         <thead>
           <tr>
@@ -34,7 +37,7 @@ function App() {
         </thead>
         <tbody>
           {users.map(user => (
-            <User key={user.id} name={user.name} surname={user.surn} age={user.age} />
+            <User key={user.id} user={user} />
           ))}
         </tbody>
       </table>
@@ -42,4 +45,4 @@ function App() {
   );
 }
 
-export default App;
+export default Users;
